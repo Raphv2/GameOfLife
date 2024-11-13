@@ -1,10 +1,9 @@
 
 
+import javax.swing.SwingUtilities;
 import modele.Environnement;
 import modele.Ordonnanceur;
 import vue_controleur.FenetrePrincipale;
-
-import javax.swing.SwingUtilities;
 
 /**
  *
