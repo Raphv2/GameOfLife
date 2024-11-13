@@ -12,46 +12,41 @@ public class Case {
         return state;
     }
 
-    public void getX() {
-        this.x = x;
-    }
 
-    public void getY() {
-        this.y = y;
-    }
 
     public void rndState() {
         state = rnd.nextBoolean();
     }
 
     private int getNeighbours(Environnement e) {
-        int n = 0
-        if (e.getCase(this, h)){
+        int n = 0;
+        if (e.getCase(this, Direction.h) != null) {
             n++;
         }
-        if (e.getCase(this, hd)){
+        if (e.getCase(this, Direction.hd) != null) {
             n++;
         }
-        if (e.getCase(this, d)){
+        if (e.getCase(this, Direction.d) != null) {
             n++;
         }
-        if (e.getCase(this, db)){
+        if (e.getCase(this, Direction.db) != null) {
             n++;
         }
-        if (e.getCase(this, b)){
+        if (e.getCase(this, Direction.b) != null) {
             n++;
         }
-        if (e.getCase(this, bg)){
+        if (e.getCase(this, Direction.bg) != null) {
             n++;
         }
-        if (e.getCase(this, g)){
+        if (e.getCase(this, Direction.g) != null) {
             n++;
         }
-        if (e.getCase(this, gh)){
+        if (e.getCase(this, Direction.gh) != null) {
             n++;
         }
-        retunr n;
+        return n;
     }
+
 
     public void nextState(Environnement e) {
         if (state){
@@ -64,12 +59,15 @@ public class Case {
             }
         }
         else {
-            if (getNeighbours(e) = 3){
+            if (getNeighbours(e) == 3){
                 state = true;
             }
         }
 
     }
 
+
+    public int getX() {return x;}
+    public int getY() {return y;}
 
 }
