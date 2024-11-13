@@ -5,21 +5,15 @@ package vue_controleur;/*
 
 
 
-import modele.Environnement;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
-
 import javax.swing.border.Border;
+import modele.Environnement;
 
 
 /**
@@ -100,7 +94,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
                     tab[i][j].setBackground(Color.WHITE);
                 }
 
-                System.out.println("hello");
+                System.out.println("minas");
             }
 
         }
