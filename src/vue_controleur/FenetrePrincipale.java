@@ -34,7 +34,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     public void build() {
         
         setTitle("Jeu de la Vie");
-        setSize(600, 500);
+        setSize(1200, 1000);
         
         // Panneau principal
         JPanel pan = new JPanel(new BorderLayout());
@@ -93,8 +93,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
                 } else {
                     tab[i][j].setBackground(Color.WHITE);
                 }
-
-                System.out.println("minas");
             }
 
         }
