@@ -20,28 +20,28 @@ public class Case {
 
     private int getNeighbours(Environnement e) {
         int n = 0;
-        if (e.getCase(this, Direction.h) != null) {
+        if (e.getCase(this, Direction.h).state) {
             n++;
         }
-        if (e.getCase(this, Direction.hd) != null) {
+        if (e.getCase(this, Direction.hd).state) {
             n++;
         }
-        if (e.getCase(this, Direction.d) != null) {
+        if (e.getCase(this, Direction.d).state) {
             n++;
         }
-        if (e.getCase(this, Direction.db) != null) {
+        if (e.getCase(this, Direction.db).state) {
             n++;
         }
-        if (e.getCase(this, Direction.b) != null) {
+        if (e.getCase(this, Direction.b).state) {
             n++;
         }
-        if (e.getCase(this, Direction.bg) != null) {
+        if (e.getCase(this, Direction.bg).state) {
             n++;
         }
-        if (e.getCase(this, Direction.g) != null) {
+        if (e.getCase(this, Direction.g).state) {
             n++;
         }
-        if (e.getCase(this, Direction.gh) != null) {
+        if (e.getCase(this, Direction.gh).state) {
             n++;
         }
         return n;
@@ -49,21 +49,19 @@ public class Case {
 
 
     public void nextState(Environnement e) {
-        if (state){
-            if (getNeighbours(e) < 2 || getNeighbours(e) > 3){
-                state = false;
-            }
+        int neighbours = getNeighbours(e);
+        System.out.println(neighbours); 
 
-            else{
-                state = true;
+        
+        if (state) {
+            if (neighbours != 2 && neighbours != 3) {
+                state = false;  //  mort
+            }
+        } else {
+            if (neighbours == 3) {
+                state = true;  //  vivante
             }
         }
-        else {
-            if (getNeighbours(e) == 3){
-                state = true;
-            }
-        }
-
     }
 
 

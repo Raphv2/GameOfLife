@@ -17,6 +17,7 @@ public class Ordonnanceur extends Thread {
             runnable.run();
             try {
                 sleep(sleepTime);
+                
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

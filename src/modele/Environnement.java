@@ -5,6 +5,7 @@ import java.util.Observable;
 public class Environnement extends Observable implements Runnable {
     private Case[][] tab;
     private int sizeX, sizeY;
+    private boolean truc = true;
 
     public int getSizeX() {
         return sizeX;
@@ -22,20 +23,20 @@ public class Environnement extends Observable implements Runnable {
 
     public Case getCase(Case source, Direction d) {
 
-    int[] offset = DirectionOffsets.getOffset(d);
+        int[] offset = DirectionOffsets.getOffset(d);
 
-    int newX = (source.getX() + offset[0]) % sizeX;
-    int newY = (source.getY() + offset[1]) % sizeY;
+        int newX = (source.getX() + offset[0]) % sizeX;
+        int newY = (source.getY() + offset[1]) % sizeY;
 
-    if (newX < 0) {
-        newX += sizeX;
-    }
-    if (newY < 0) {
-        newY += sizeY;
-    }
+        if (newX < 0) {
+            newX += sizeX;
+        }
+        if (newY < 0) {
+            newY += sizeY;
+        }
 
-    // Retourner la case à ces coordonnées
-    return tab[newX][newY];
+        // Retourner la case à ces coordonnées
+        return tab[newX][newY];
 }
 
 
@@ -64,9 +65,20 @@ public class Environnement extends Observable implements Runnable {
 
     }
 
+    
+
     @Override
     public void run() {
-        rndState();
+        if(truc){
+            rndState();
+            truc = false;
+        }
+
+        for (int i = 0; i < sizeX; i++) 
+            for (int j = 0; j < sizeY; j++) {
+            tab[i][j].nextState( this);
+        }
+
         // notification de l'observer
         setChanged();
         notifyObservers();

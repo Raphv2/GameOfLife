@@ -25,8 +25,8 @@ public class Main {
 				fenetre.setVisible(true);
 
 				e.addObserver(fenetre);
-
-				Ordonnanceur o = new Ordonnanceur(200000, e);
+        
+				Ordonnanceur o = new Ordonnanceur(1000, e);
 				o.start();
 
 			}
