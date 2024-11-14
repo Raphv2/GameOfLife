@@ -21,27 +21,23 @@ public class Environnement extends Observable implements Runnable {
     }
 
     public Case getCase(Case source, Direction d) {
-        switch (d) {
-            case h:
-                return tab[source.getX() % sizeX][source.getY() + 1 % sizeY];
-            case hd:
-                return tab[source.getX() + 1 % sizeX][source.getY() + 1 % sizeY];
-            case d:
-                return tab[source.getX() + 1 % sizeX][source.getY() % sizeY];
-            case db:
-                return tab[source.getX() + 1 % sizeX][source.getY() - 1 % sizeY];
-            case b:
-                return tab[source.getX() % sizeX][source.getY() - 1 % sizeY];
-            case bg:
-                return tab[source.getX() - 1 % sizeX][source.getY() - 1 % sizeY];
-            case g:
-                return tab[source.getX() - 1 % sizeX][source.getY() % sizeY];
-            case gh:
-                return tab[source.getX() - 1 % sizeX][source.getY() + 1 % sizeY];
-            default:
-                throw new IllegalArgumentException("Direction inconnue : " + d);
-        }
+
+    int[] offset = DirectionOffsets.getOffset(d);
+
+    int newX = (source.getX() + offset[0]) % sizeX;
+    int newY = (source.getY() + offset[1]) % sizeY;
+
+    if (newX < 0) {
+        newX += sizeX;
     }
+    if (newY < 0) {
+        newY += sizeY;
+    }
+
+    // Retourner la case à ces coordonnées
+    return tab[newX][newY];
+}
+
 
 
     public Environnement(int _sizeX, int _sizeY) {
@@ -64,6 +60,7 @@ public class Environnement extends Observable implements Runnable {
 
             }
         }
+        
 
     }
 
