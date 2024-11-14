@@ -49,18 +49,16 @@ public class Case {
 
 
     public void nextState(Environnement e) {
-        int neighbours = getNeighbours(e);  // Compte les voisins vivants
+        int neighbours = getNeighbours(e); 
         System.out.println(neighbours); 
-        // Règles du jeu de la vie appliquées à la cellule
-        if (state) {  // Si la cellule est vivante
+        if (state) {  
             if (neighbours < 2 || neighbours > 3) {
-                state = false;  // La cellule meurt par sous-population ou surpopulation
+                state = false; 
             }
-            // Sinon, la cellule reste vivante (si elle a 2 ou 3 voisins vivants)
-        } else {  // Si la cellule est morte
+        } else {  
             if (neighbours == 3) {
-                state = true;  // La cellule devient vivante par reproduction
-            }
+                state = true;
+            }  
         }
     }
 
