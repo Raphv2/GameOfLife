@@ -4,6 +4,7 @@ import java.util.Observable;
 
 public class Environnement extends Observable implements Runnable {
     private Case[][] tab;
+    private Case[][] tab2;
     private int sizeX, sizeY;
     private boolean truc = true;
 
@@ -46,9 +47,14 @@ public class Environnement extends Observable implements Runnable {
         sizeY = _sizeY;
 
         tab = new Case[sizeX][sizeY];
+        tab2 = new Case[sizeX][sizeY];
+
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 tab[i][j] = new Case();
+                tab2[i][j] = new Case();
+                
+                tab[i][j].rndState();
             }
         }
     }
@@ -64,20 +70,34 @@ public class Environnement extends Observable implements Runnable {
 
     }
 
+   public void updateState() {
+
+    if (tab2 == null) 
+    {   
+        tab2 = new Case[sizeX][sizeY];
+    }
+ 
+    for (int i = 0; i < sizeX; i++) 
+        for (int j = 0; j < sizeY; j++)
+        {
+            tab2[i][j].nextState(this);
+        }
+
+    Case[][] temp = tab;
+    tab = tab2;
+    tab2 = temp; 
+}
+
     
 
     @Override
     public void run() {
         if(truc){
-            rndState();
-            truc = false;
+             rndState();
+             truc = false;
         }
-
-        for (int i = 0; i < sizeX; i++) 
-            for (int j = 0; j < sizeY; j++) {
-            tab[i][j].nextState( this);
-        }
-
+        updateState();
+        
         // notification de l'observer
         setChanged();
         notifyObservers();
