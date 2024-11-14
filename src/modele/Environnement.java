@@ -22,11 +22,11 @@ public class Environnement extends Observable implements Runnable {
     }
 
     public Case getCase(Case source, Direction d) {
-
         int[] offset = DirectionOffsets.getOffset(d);
 
         int newX = (source.getX() + offset[0]) % sizeX;
         int newY = (source.getY() + offset[1]) % sizeY;
+
 
         if (newX < 0) {
             newX += sizeX;
@@ -35,9 +35,8 @@ public class Environnement extends Observable implements Runnable {
             newY += sizeY;
         }
 
-        // Retourner la case à ces coordonnées
         return tab[newX][newY];
-}
+    }
 
 
 
