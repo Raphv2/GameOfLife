@@ -4,9 +4,7 @@ import java.util.Observable;
 
 public class Environnement extends Observable implements Runnable {
     private Case[][] tab;
-    private Case[][] tab2;
     private int sizeX, sizeY;
-    private boolean truc = true;
 
     public int getSizeX() {
         return sizeX;
@@ -25,8 +23,8 @@ public class Environnement extends Observable implements Runnable {
     public Case getCase(Case source, Direction d) {
         int[] offset = DirectionOffsets.getOffset(d);
 
-        int newX = (source.getX() + offset[0]) % sizeX;
-        int newY = (source.getY() + offset[1]) % sizeY;
+        int newX = (source.getX() + offset[0]);
+        int newY = (source.getY() + offset[1]);
 
 
         if (newX < 0) {
@@ -35,7 +33,7 @@ public class Environnement extends Observable implements Runnable {
         if (newY < 0) {
             newY += sizeY;
         }
-
+        
         return tab[newX][newY];
     }
 
@@ -47,12 +45,12 @@ public class Environnement extends Observable implements Runnable {
         sizeY = _sizeY;
 
         tab = new Case[sizeX][sizeY];
-        tab2 = new Case[sizeX][sizeY];
+        
 
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                tab[i][j] = new Case();
-                tab2[i][j] = new Case();
+                tab[i][j] = new Case(i, j);
+                
                 
                 tab[i][j].rndState();
             }
@@ -66,38 +64,29 @@ public class Environnement extends Observable implements Runnable {
 
             }
         }
-        
-
     }
 
-   public void updateState() {
+public void updateState() {
 
-    if (tab2 == null) 
-    {   
-        tab2 = new Case[sizeX][sizeY];
-    }
- 
-    for (int i = 0; i < sizeX; i++) 
-        for (int j = 0; j < sizeY; j++)
-        {
-            tab2[i][j].nextState(this);
+    Case[][] temp = new Case[sizeX][sizeY];
+
+    for (int i = 0; i < sizeX; i++) {
+        for (int j = 0; j < sizeY; j++) {
+            temp[i][j] = new Case(i, j);
+            temp[i][j].setState(tab[i][j].nextState(this));
+            
         }
-
-    Case[][] temp = tab;
-    tab = tab2;
-    tab2 = temp; 
+    }
+    tab = temp;
 }
 
     
 
     @Override
     public void run() {
-        if(truc){
-             rndState();
-             truc = false;
-        }
+       
         updateState();
-        
+      
         // notification de l'observer
         setChanged();
         notifyObservers();
