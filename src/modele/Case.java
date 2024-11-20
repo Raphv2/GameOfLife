@@ -43,8 +43,6 @@ public class Case {
         alive += e.getCase(this, Direction.d).state ? 1 : 0;
         alive += e.getCase(this, Direction.bg).state ? 1 : 0;
         alive += e.getCase(this, Direction.db).state ? 1 : 0;
-        alive += e.getCase(this, Direction.h).state ? 1 : 0;
-        alive += e.getCase(this, Direction.b).state ? 1 : 0;
         
         if (state) {
             return alive == 2 || alive == 3;

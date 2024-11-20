@@ -14,8 +14,7 @@ import java.util.Observer;
 import javax.swing.*;
 import javax.swing.border.Border;
 import modele.Environnement;
-
-
+import modele.HexagonalGrid;
 /**
  *
  * @author frederic
@@ -23,6 +22,7 @@ import modele.Environnement;
 public class FenetrePrincipale extends JFrame implements Observer {
 
     private JPanel[][] tab;
+    private HexagonalGrid hexaGrid;
     Environnement env;
     public FenetrePrincipale(Environnement _env) {
         super();
@@ -42,19 +42,12 @@ public class FenetrePrincipale extends JFrame implements Observer {
         
         // Panneau central
         JComponent pan1 = new JPanel (new GridLayout(env.getSizeX(),env.getSizeY()));
-        tab = new JPanel[env.getSizeX()][env.getSizeY()];
+        hexaGrid = new HexagonalGrid(env.getSizeX(),env.getSizeY(), 5);
 
 
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         pan1.setBorder(blackline);
-        for(int i = 0; i<env.getSizeX();i++){
-            for (int j = 0; j < env.getSizeY(); j++) {
-                tab[i][j] = new JPanel();
-
-                pan1.add(tab[i][j]);
-            }
-
-        }
+        
         
         // Panneau pour les boutons
         JPanel pan2 = new JPanel(new FlowLayout());
@@ -77,6 +70,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         m.add(mi);
         jm.add(m);
         setJMenuBar(jm);
+        pan.add(hexaGrid);
         
         
     }
@@ -85,13 +79,12 @@ public class FenetrePrincipale extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // raffraîchissement de la vue
-        for(int i = 0; i<env.getSizeX();i++){
+         for(int i = 0; i<env.getSizeX();i++){
             for (int j = 0; j < env.getSizeY(); j++) {
                 if (env.getState(i, j)) {
-
-                    tab[i][j].setBackground(Color.BLACK);
+                    hexaGrid.repaintHexagon(i, j, Color.BLACK);
                 } else {
-                    tab[i][j].setBackground(Color.WHITE);
+                    hexaGrid.repaintHexagon(i, j,Color.WHITE);
                 }
             }
 
