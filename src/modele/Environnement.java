@@ -70,19 +70,19 @@ public class Environnement extends Observable implements Runnable {
         }
     }
 
-public void updateState() {
+    public void updateState() {
 
-    Case[][] temp = new Case[sizeX][sizeY];
+        Case[][] temp = new Case[sizeX][sizeY];
 
-    for (int i = 0; i < sizeX; i++) {
-        for (int j = 0; j < sizeY; j++) {
-            temp[i][j] = new Case(i, j);
-            temp[i][j].setState(tab[i][j].nextState(this));
-            
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                temp[i][j] = new Case(i, j);
+                temp[i][j].setState(tab[i][j].nextState(this));
+                
+            }
         }
+        tab = temp;
     }
-    tab = temp;
-}
 
     
 

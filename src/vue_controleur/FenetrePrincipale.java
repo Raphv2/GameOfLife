@@ -63,10 +63,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
         
         setContentPane(pan);
 
-
-        
-
-        
         // Ajout Menu
         JMenuBar jm = new JMenuBar();
         JMenu m = new JMenu("Fichier");
