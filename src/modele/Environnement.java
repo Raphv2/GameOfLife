@@ -20,6 +20,10 @@ public class Environnement extends Observable implements Runnable {
         return tab[x][y].getState();
     }
 
+    public void setState(int x, int y, boolean state) {
+        tab[x][y].setState(state);
+    }
+
     public Case getCase(Case source, Direction d) {
         int[] offset = DirectionOffsets.getOffset(d);
 

@@ -21,9 +21,11 @@ import modele.HexagonalGrid;
  */
 public class FenetrePrincipale extends JFrame implements Observer {
 
-    private JPanel[][] tab;
     private HexagonalGrid hexaGrid;
-    Environnement env;
+    public Environnement env;
+    JLabel label;
+    
+
     public FenetrePrincipale(Environnement _env) {
         super();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +62,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
         pan.add(pan2, BorderLayout.EAST);
         
         setContentPane(pan);
+
+
         
 
         
@@ -67,11 +71,16 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JMenuBar jm = new JMenuBar();
         JMenu m = new JMenu("Fichier");
         JMenuItem mi = new JMenuItem("Charger");
+
         m.add(mi);
         jm.add(m);
         setJMenuBar(jm);
         pan.add(hexaGrid);
-        
+
+        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid);
+        pan.addMouseListener(mouseHandler);
+
+
         
     }
 

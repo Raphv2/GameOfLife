@@ -9,6 +9,8 @@ public class HexagonalGrid extends JPanel {
     private int cols; 
     private int hexSize;
 
+    public int getHexSize(){return hexSize;}
+
     public HexagonalGrid(int rows, int cols, int hexSize) {
         this.rows = rows;
         this.cols = cols;
