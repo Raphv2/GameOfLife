@@ -44,7 +44,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         
         // Panneau central
         JComponent pan1 = new JPanel (new GridLayout(env.getSizeX(),env.getSizeY()));
-        hexaGrid = new HexagonalGrid(env.getSizeX(),env.getSizeY(), 5);
+        hexaGrid = new HexagonalGrid(env.getSizeX(),env.getSizeY(), 10, 30, 50);
 
 
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
@@ -73,7 +73,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         setJMenuBar(jm);
         pan.add(hexaGrid);
 
-        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid);
+        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid, 30, 50);
         pan.addMouseListener(mouseHandler);
 
 

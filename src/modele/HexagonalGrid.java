@@ -8,13 +8,17 @@ public class HexagonalGrid extends JPanel {
     private int rows;
     private int cols; 
     private int hexSize;
+    private int offsetX;
+    private int offsetY;
 
     public int getHexSize(){return hexSize;}
 
-    public HexagonalGrid(int rows, int cols, int hexSize) {
+    public HexagonalGrid(int rows, int cols, int hexSize, int offsetX, int offsetY) {
         this.rows = rows;
         this.cols = cols;
         this.hexSize = hexSize;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
         setPreferredSize(new Dimension(cols * hexSize * 2, rows * hexSize * 2));
     }
 
@@ -24,14 +28,14 @@ public class HexagonalGrid extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int height = (int) (Math.sqrt(3) * hexSize) + 5; 
-        int width = 2 * hexSize ; 
+        int height = (int) (Math.sqrt(3) * hexSize) + 15; 
+        int width = 2 * hexSize -2; 
         int yOffset = height / 2; 
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                int x = col * width + (row % 2 == 0 ? 0 : hexSize) + 10; // Décalage colonnes
-                int y = row * (height - yOffset) + 100;
+                int x = col * width + (row % 2 == 0 ? 0 : hexSize) + offsetX; // Décalage colonnes
+                int y = row * (height - yOffset) + offsetY;
                 drawHexagon(g2d, x, y, hexSize, Color.WHITE);
             }
         }
@@ -52,12 +56,12 @@ public class HexagonalGrid extends JPanel {
     }
 
         public void repaintHexagon(int row, int col, Color color) {
-        int height = (int) (Math.sqrt(3) * hexSize) + 5;
-        int width = 2 * hexSize;
+        int height = (int) (Math.sqrt(3) * hexSize) + 15;
+        int width = 2 * hexSize -2;
         int yOffset = height / 2;
 
-        int x = col * width + (row % 2 == 0 ? 0 : hexSize) + 10;
-        int y = row * (height - yOffset) + 100;
+        int x = col * width + (row % 2 == 0 ? 0 : hexSize) + offsetX;
+        int y = row * (height - yOffset) + offsetY;
 
         Graphics g = getGraphics(); 
         if (g != null) {

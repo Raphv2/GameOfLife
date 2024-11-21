@@ -19,13 +19,13 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 
-				Environnement e = new Environnement(100, 100);
+				Environnement e = new Environnement(50, 50);
 				FenetrePrincipale fenetre = new FenetrePrincipale(e);
 				fenetre.setVisible(true);
 
 				e.addObserver(fenetre);
         
-				Ordonnanceur o = new Ordonnanceur(10, e);
+				Ordonnanceur o = new Ordonnanceur(1000, e);
 				o.start();
 
 			}
