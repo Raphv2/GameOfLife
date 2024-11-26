@@ -1,6 +1,6 @@
 package modele;
 
-public class Modules{
+/*public class Modules{
 
     public static int[][][] 3x3Blinker(){
         int[][][] blinker;
@@ -40,3 +40,4 @@ public class Modules{
         spaceship[count] = [3][3];
     }
 }
+*/

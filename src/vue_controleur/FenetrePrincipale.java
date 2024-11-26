@@ -33,34 +33,36 @@ public class FenetrePrincipale extends JFrame implements Observer {
         build();
     }
 
+    // Dans la méthode build()
     public void build() {
-        
         setTitle("Jeu de la Vie");
         setSize(1200, 1000);
-        
+
         // Panneau principal
         JPanel pan = new JPanel(new BorderLayout());
-        
-        
+
         // Panneau central
-        JComponent pan1 = new JPanel (new GridLayout(env.getSizeX(),env.getSizeY()));
-        hexaGrid = new HexagonalGrid(env.getSizeX(),env.getSizeY(), 10, 30, 50);
+        JComponent pan1 = new JPanel(new GridLayout(env.getSizeX(), env.getSizeY()));
+        hexaGrid = new HexagonalGrid(env.getSizeX(), env.getSizeY(), 10, 30, 50);
 
-
-        Border blackline = BorderFactory.createLineBorder(Color.black,1);
+        Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         pan1.setBorder(blackline);
-        
-        
+
         // Panneau pour les boutons
         JPanel pan2 = new JPanel(new FlowLayout());
-        pan2.add(new JButton("b1"));
-        pan2.add(new JTextField("jt1"));
-        
-        
-        
+
+        // Bouton b1
+        JButton button = new JButton("Pause.");
+        pan2.add(button);
+
+        // Ajouter un ActionListener au bouton
+        button.addActionListener(e -> {
+            env.pause();
+        });
+
         pan.add(pan1, BorderLayout.CENTER);
-        pan.add(pan2, BorderLayout.EAST);
-        
+        pan.add(pan2, BorderLayout.WEST);
+
         setContentPane(pan);
 
         // Ajout Menu
@@ -75,9 +77,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         MouseHandler mouseHandler = new MouseHandler(env, hexaGrid, 30, 50);
         pan.addMouseListener(mouseHandler);
-
-
-        
     }
 
 

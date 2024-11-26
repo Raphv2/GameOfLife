@@ -5,6 +5,7 @@ import java.util.Observable;
 public class Environnement extends Observable implements Runnable {
     private Case[][] tab;
     private int sizeX, sizeY;
+    private boolean pause;
 
     public int getSizeX() {
         return sizeX;
@@ -12,6 +13,10 @@ public class Environnement extends Observable implements Runnable {
 
     public int getSizeY() {
         return sizeY;
+    }
+
+    public void pause(){
+        pause = !pause;
     }
 
    
@@ -59,6 +64,8 @@ public class Environnement extends Observable implements Runnable {
                 tab[i][j].rndState();
             }
         }
+
+        pause = false;
     }
 
     public void rndState() {
@@ -88,8 +95,10 @@ public class Environnement extends Observable implements Runnable {
 
     @Override
     public void run() {
-       
-        updateState();
+       if(!pause){
+            updateState();
+       }
+        
       
         // notification de l'observer
         setChanged();
