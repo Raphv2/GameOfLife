@@ -54,13 +54,13 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JButton button = new JButton("<html><div style='text-align: center; color: blue; '>Pause.</div></html>"); //on peut mettre du css mdrr
         JButton moins = new JButton("<html><div style='text-align: center; color: blue; '>-</div></html>");
         JButton plus = new JButton("<html><div style='text-align: center; color: blue; '>+</div></html>");
-
+        JButton NUKE = new JButton("<html><div style='text-align: center; color: blue; '>NUKE.</div></html>");
 
         pan2.add(button);
         pan2.add(Box.createVerticalStrut(10));
         pan2.add(plus);
         pan2.add(moins);
-        
+        pan2.add(NUKE);
        
         button.addActionListener(e -> {
             env.pause();
@@ -74,6 +74,10 @@ public class FenetrePrincipale extends JFrame implements Observer {
         plus.addActionListener(e -> {
              if(env.getSpeed() -100 >0) env.setSpeed(-100);
              else System.out.println("ARRETE!!!!!!!!!");
+        });
+
+        NUKE.addActionListener(e -> {
+             env.NUKE();
         });
 
         pan.add(pan1, BorderLayout.CENTER);

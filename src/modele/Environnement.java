@@ -73,7 +73,7 @@ public class Environnement extends Observable implements Runnable {
         }
 
         pause = false;
-        speed = 5001;
+        speed = 1;
     }
 
     public void rndState() {
@@ -97,6 +97,15 @@ public class Environnement extends Observable implements Runnable {
             }
         }
         tab = temp;
+    }
+
+    public void NUKE(){
+        for (int i = 0; i < sizeX; i++) 
+        for (int j = 0; j < sizeY; j++) {
+                tab[i][j].setState(false);
+            
+        }
+        
     }
 
     

@@ -45,8 +45,8 @@ public class MouseHandler implements MouseListener {
         int y = e.getY();
         
         int hexSize = hexaGrid.getHexSize();
-        int height = (int) (Math.sqrt(3) * hexSize) + 15;
-        int width = 2 * hexSize -2;
+        int height = (int) ((Math.sqrt(3) * hexSize) + 15.2);
+        int width = (int) (2 * hexSize +1.1);
         int yOffset = height / 2;
 
         int row = (y - offsetY) / (height - yOffset);
@@ -57,7 +57,7 @@ public class MouseHandler implements MouseListener {
         }
 
         if (row >= 0 && row < env.getSizeX() && col >= 0 && col < env.getSizeY()) {
-            env.setState(row, col, true); 
+            env.setState(row, col, !env.getState(row, col)); 
             System.out.println("flute");
         } else {
             System.out.println("PAS DEDANS!!!");
