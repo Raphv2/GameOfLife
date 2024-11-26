@@ -6,6 +6,7 @@ public class Environnement extends Observable implements Runnable {
     private Case[][] tab;
     private int sizeX, sizeY;
     private boolean pause;
+    private int speed;
 
     public int getSizeX() {
         return sizeX;
@@ -17,6 +18,12 @@ public class Environnement extends Observable implements Runnable {
 
     public void pause(){
         pause = !pause;
+    }
+
+    public int getSpeed(){return speed;}
+
+    public void setSpeed(int moreSpeed){
+        speed += moreSpeed;
     }
 
    
@@ -66,6 +73,7 @@ public class Environnement extends Observable implements Runnable {
         }
 
         pause = false;
+        speed = 5001;
     }
 
     public void rndState() {
@@ -97,6 +105,7 @@ public class Environnement extends Observable implements Runnable {
     public void run() {
        if(!pause){
             updateState();
+            System.out.println(getSpeed());
        }
         
       

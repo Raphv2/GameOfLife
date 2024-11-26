@@ -7,7 +7,6 @@ package vue_controleur;/*
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
@@ -49,15 +48,32 @@ public class FenetrePrincipale extends JFrame implements Observer {
         pan1.setBorder(blackline);
 
         // Panneau pour les boutons
-        JPanel pan2 = new JPanel(new FlowLayout());
-
+        JPanel pan2 = new JPanel();
+        pan2.setLayout(new BoxLayout(pan2, BoxLayout.Y_AXIS));
         // Bouton b1
-        JButton button = new JButton("Pause.");
-        pan2.add(button);
+        JButton button = new JButton("<html><div style='text-align: center; color: blue; '>Pause.</div></html>"); //on peut mettre du css mdrr
+        JButton moins = new JButton("<html><div style='text-align: center; color: blue; '>-</div></html>");
+        JButton plus = new JButton("<html><div style='text-align: center; color: blue; '>+</div></html>");
 
-        // Ajouter un ActionListener au bouton
+
+        pan2.add(button);
+        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(plus);
+        pan2.add(moins);
+        
+       
         button.addActionListener(e -> {
             env.pause();
+        });
+
+        moins.addActionListener(e -> {
+            if(env.getSpeed()<=10000)env.setSpeed(100);
+            else System.out.println("mec arrete????");
+        });
+
+        plus.addActionListener(e -> {
+             if(env.getSpeed() -100 >0) env.setSpeed(-100);
+             else System.out.println("ARRETE!!!!!!!!!");
         });
 
         pan.add(pan1, BorderLayout.CENTER);
