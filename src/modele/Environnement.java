@@ -7,6 +7,7 @@ public class Environnement extends Observable implements Runnable {
     private int sizeX, sizeY;
     private boolean pause;
     private int speed;
+    private boolean type;
 
     public int getSizeX() {
         return sizeX;
@@ -22,8 +23,14 @@ public class Environnement extends Observable implements Runnable {
 
     public int getSpeed(){return speed;}
 
+    public boolean getType(){return type;}
+
     public void setSpeed(int moreSpeed){
         speed += moreSpeed;
+    }
+
+    public void setType(){
+       type = !type;
     }
 
    
@@ -55,7 +62,7 @@ public class Environnement extends Observable implements Runnable {
 
 
 
-    public Environnement(int _sizeX, int _sizeY) {
+    public Environnement(int _sizeX, int _sizeY, boolean typeuh) {
 
         sizeX = _sizeX;
         sizeY = _sizeY;
@@ -73,7 +80,8 @@ public class Environnement extends Observable implements Runnable {
         }
 
         pause = false;
-        speed = 1;
+        speed = 1001;
+        type = typeuh;
     }
 
     public void rndState() {
@@ -92,7 +100,7 @@ public class Environnement extends Observable implements Runnable {
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 temp[i][j] = new Case(i, j);
-                temp[i][j].setState(tab[i][j].nextState(this));
+                temp[i][j].setState(tab[i][j].nextState(this, type));
                 
             }
         }

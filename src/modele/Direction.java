@@ -1,5 +1,5 @@
 package modele;
 
 public enum Direction {
-    hd, d, db, bg, g, gh
+    hd, d, db, bg, g, gh, h, b
 }

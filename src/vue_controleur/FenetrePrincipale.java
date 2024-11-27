@@ -21,6 +21,7 @@ import modele.HexagonalGrid;
 public class FenetrePrincipale extends JFrame implements Observer {
 
     private HexagonalGrid hexaGrid;
+    private JPanel[][] tab;
     public Environnement env;
     JLabel label;
     
@@ -44,7 +45,22 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JComponent pan1 = new JPanel(new GridLayout(env.getSizeX(), env.getSizeY()));
         hexaGrid = new HexagonalGrid(env.getSizeX(), env.getSizeY(), 10, 30, 50);
 
-        Border blackline = BorderFactory.createLineBorder(Color.black, 1);
+        JComponent pan3 = new JPanel (new GridLayout(env.getSizeX(),env.getSizeY()));
+        tab = new JPanel[env.getSizeX()][env.getSizeY()];
+
+
+        Border blackline = BorderFactory.createLineBorder(Color.black,1);
+        pan1.setBorder(blackline);
+        for(int i = 0; i<env.getSizeX();i++){
+            for (int j = 0; j < env.getSizeY(); j++) {
+                tab[i][j] = new JPanel();
+
+                pan1.add(tab[i][j]);
+            }
+
+        }
+
+        
         pan1.setBorder(blackline);
 
         // Panneau pour les boutons
@@ -55,12 +71,19 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JButton moins = new JButton("<html><div style='text-align: center; color: blue; '>-</div></html>");
         JButton plus = new JButton("<html><div style='text-align: center; color: blue; '>+</div></html>");
         JButton NUKE = new JButton("<html><div style='text-align: center; color: blue; '>NUKE.</div></html>");
+        JButton reset = new JButton("<html><div style='text-align: center; color: blue; '>RESET.</div></html>");
 
+        pan2.add(Box.createVerticalStrut(50));
         pan2.add(button);
         pan2.add(Box.createVerticalStrut(10));
         pan2.add(plus);
         pan2.add(moins);
+        pan2.add(Box.createVerticalStrut(10));
         pan2.add(NUKE);
+        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(reset);
+        pan2.add(Box.createVerticalStrut(10));
+
        
         button.addActionListener(e -> {
             env.pause();
@@ -80,6 +103,10 @@ public class FenetrePrincipale extends JFrame implements Observer {
              env.NUKE();
         });
 
+        reset.addActionListener(e -> {
+             env.rndState();
+        });
+
         pan.add(pan1, BorderLayout.CENTER);
         pan.add(pan2, BorderLayout.WEST);
 
@@ -93,7 +120,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
         m.add(mi);
         jm.add(m);
         setJMenuBar(jm);
-        pan.add(hexaGrid);
+        if(env.getType()) pan.add(hexaGrid);
+        
 
         MouseHandler mouseHandler = new MouseHandler(env, hexaGrid, 30, 50);
         pan.addMouseListener(mouseHandler);
@@ -102,8 +130,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        // raffraîchissement de la vue
-         for(int i = 0; i<env.getSizeX();i++){
+        if(env.getType()){
+            for(int i = 0; i<env.getSizeX();i++)
             for (int j = 0; j < env.getSizeY(); j++) {
                 if (env.getState(i, j)) {
                     hexaGrid.repaintHexagon(i, j, Color.BLACK);
@@ -111,8 +139,25 @@ public class FenetrePrincipale extends JFrame implements Observer {
                     hexaGrid.repaintHexagon(i, j,Color.WHITE);
                 }
             }
-
         }
+        else{
+            for(int i = 0; i<env.getSizeX();i++)
+            for (int j = 0; j < env.getSizeY(); j++) {
+                if (env.getState(i, j)) {
+
+                    tab[i][j].setBackground(Color.BLACK);
+                } else {
+                    tab[i][j].setBackground(Color.WHITE);
+                }
+
+                
+            }
+
+        
+        }
+        
+
+        
 
 
     }
