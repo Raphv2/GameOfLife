@@ -14,6 +14,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import modele.Environnement;
 import modele.HexagonalGrid;
+import modele.RuleType;
+
 /**
  *
  * @author frederic
@@ -67,23 +69,31 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JPanel pan2 = new JPanel();
         pan2.setLayout(new BoxLayout(pan2, BoxLayout.Y_AXIS));
         // Bouton b1
-        JButton button = new JButton("<html><div style='text-align: center; color: blue; '>Pause.</div></html>"); //on peut mettre du css mdrr
-        JButton moins = new JButton("<html><div style='text-align: center; color: blue; '>-</div></html>");
-        JButton plus = new JButton("<html><div style='text-align: center; color: blue; '>+</div></html>");
-        JButton NUKE = new JButton("<html><div style='text-align: center; color: blue; '>NUKE.</div></html>");
-        JButton reset = new JButton("<html><div style='text-align: center; color: blue; '>RESET.</div></html>");
+        JButton button = createButton("Pause");
+        JButton moins = createButton("-");
+        JButton plus = createButton("+");
+        JButton NUKE = createButton("NUKE");
+        JButton reset = createButton("RESET");
 
-        pan2.add(Box.createVerticalStrut(50));
+        pan2.add(Box.createVerticalStrut(40));
         pan2.add(button);
-        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(Box.createVerticalStrut(5));
         pan2.add(plus);
         pan2.add(moins);
-        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(Box.createVerticalStrut(5));
         pan2.add(NUKE);
-        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(Box.createVerticalStrut(5));
         pan2.add(reset);
-        pan2.add(Box.createVerticalStrut(10));
+        pan2.add(Box.createVerticalStrut(5));
 
+
+        for (RuleType ruleType : RuleType.values()) {
+            JButton ruleButton = createButton(ruleType.getRulesName());
+            int index = ruleType.ordinal(); 
+            ruleButton.addActionListener(e -> env.setRules(index)); 
+            pan2.add(Box.createVerticalStrut(5));
+            pan2.add(ruleButton); 
+        }
        
         button.addActionListener(e -> {
             env.pause();
@@ -107,6 +117,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
              env.rndState();
         });
 
+
+    
+
         pan.add(pan1, BorderLayout.CENTER);
         pan.add(pan2, BorderLayout.WEST);
 
@@ -125,6 +138,11 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         MouseHandler mouseHandler = new MouseHandler(env, hexaGrid, 30, 50);
         pan.addMouseListener(mouseHandler);
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton("<html><div style='text-align: center; color: blue; '>" + text + "</div></html>");
+        return button;
     }
 
 

@@ -67,16 +67,12 @@ public class Case {
         if(type) alive = getNeighboreHexa(e);
         else alive = getNeighbore(e);      
 
-        if (state) {
-            return alive == 2 || alive == 3;
-        } else {    
-            return alive == 3;
-        }
-}
+        return e.getRules().applyRule(state, alive);
+    }
 
     public void setState(boolean state) {
             this.state = state;
-        }
+    }
 
     public int getX() {return x;}
     public int getY() {return y;}
