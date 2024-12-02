@@ -88,6 +88,8 @@ public class Environnement extends Observable implements Runnable {
         return tab[newX][newY];
     }
 
+    public Case getCase(int x, int y) {return tab[x][y];}
+
 
 
     public Environnement(int _sizeX, int _sizeY, boolean typeuh) {
@@ -101,7 +103,7 @@ public class Environnement extends Observable implements Runnable {
 
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                tab[i][j] = new Case(i, j);
+                tab[i][j] = new Case(i, j, 5, 5);
                 
                 
                 tab[i][j].rndState();
@@ -117,7 +119,7 @@ public class Environnement extends Observable implements Runnable {
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 tab[i][j].rndState();
-
+                tab[i][j].setLife(8);
             }
         }
     }
@@ -128,9 +130,10 @@ public class Environnement extends Observable implements Runnable {
 
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                temp[i][j] = new Case(i, j);
+                temp[i][j] = new Case(i, j, tab[i][j].getLife(),tab[i][j].getLife2() );
                 temp[i][j].setState(tab[i][j].nextState(this, type));
-                
+                temp[i][j].setLife(tab[i][j].getLife());
+                System.out.println(temp[i][j].getLife());
             }
         }
         tab = temp;
@@ -151,7 +154,7 @@ public class Environnement extends Observable implements Runnable {
     public void run() {
        if(!pause){
             updateState();
-            System.out.println(getSpeed());
+            
        }
         
       

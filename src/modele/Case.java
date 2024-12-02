@@ -8,19 +8,50 @@ public class Case {
     
     private int x;
     private int y;
+    private int life;
+    private int life2;    
 
-    public boolean getState() {
-        return state;
+    public boolean getState() {return state;}
+
+    public int getLife(){return life;}
+    public int getLife2(){return life2;}
+    public void setLife(int life2){life = life2;}
+    public void loseLife(int amount) {
+        this.life -= amount;
+        if (this.life < 0) {
+            this.life = 0; // Empêche d'avoir une vie négative
+        }
     }
+
+    public void gainLife(int amount) {this.life += amount;}
+
+    public boolean isAlive() {return life > 0;}
+
 
     public Case(boolean state) {
         this.state = state;
     }
     
-    public Case(boolean state, int x, int y) {
+    public Case(boolean state, int x, int y) { 
         this.state = state;
         this.x = x;
         this.y = y;
+    }
+
+    public Case( int x, int y, int life) {
+        
+        this.x = x;
+        this.y = y;
+        this.life = life;
+        
+    }
+
+     public Case( int x, int y, int life, int life2) {
+        
+        this.x = x;
+        this.y = y;
+        this.life = life;
+        this.life2 = life2;
     }
 
     public Case( int x, int y) {
@@ -66,8 +97,10 @@ public class Case {
 
         if(type) alive = getNeighboreHexa(e);
         else alive = getNeighbore(e);      
-
-        return e.getRules().applyRule(state, alive);
+        if(life <= 0) return false;
+        else {
+            return e.getRules().applyRule(state, alive, this);
+        }
     }
 
     public void setState(boolean state) {
