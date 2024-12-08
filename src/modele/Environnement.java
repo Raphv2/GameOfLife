@@ -133,7 +133,6 @@ public class Environnement extends Observable implements Runnable {
                 temp[i][j] = new Case(i, j, tab[i][j].getLife(),tab[i][j].getLife2() );
                 temp[i][j].setState(tab[i][j].nextState(this, type));
                 temp[i][j].setLife(tab[i][j].getLife());
-                System.out.println(temp[i][j].getLife());
             }
         }
         tab = temp;

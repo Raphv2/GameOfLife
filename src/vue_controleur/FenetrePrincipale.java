@@ -151,7 +151,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         if(env.getType()) pan.add(hexaGrid);
         
 
-        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid, 30, 50);
+        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid);
         pan.addMouseListener(mouseHandler);
     }
 

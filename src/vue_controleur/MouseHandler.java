@@ -9,14 +9,10 @@ public class MouseHandler implements MouseListener {
     
     public Environnement env;
     private HexagonalGrid hexaGrid;
-    private int offsetX;
-    private int offsetY;
 
-    public MouseHandler(Environnement env, HexagonalGrid hexaGrid, int offsetX, int offsetY) {
+    public MouseHandler(Environnement env, HexagonalGrid hexaGrid) {
         this.env = env;
         this.hexaGrid = hexaGrid;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
     }
 
     @Override
@@ -41,26 +37,19 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        int x = e.getX() + 30; 
+        int y = e.getY() + 50; 
         
-        int hexSize = hexaGrid.getHexSize();
-        int height = (int) ((Math.sqrt(3) * hexSize) + 14);
-        int width = (int) (2 * hexSize ) +1;
-        int yOffset = height / 2;
+        int cellSize = 20; 
 
-        int row = (y - offsetY) / (height - yOffset);
-        int col = (x - offsetX) / width;
-
-        if (row % 2 != 0) {
-            col = (x - offsetX - hexSize) / width;
-        }
+        int row = y / cellSize;
+        int col = x / cellSize;
 
         if (row >= 0 && row < env.getSizeX() && col >= 0 && col < env.getSizeY()) {
-            env.setState(row, col, !env.getState(row, col)); 
-            System.out.println("flute");
+            env.setState(row, col, !env.getState(row, col));
+            System.out.println("Case cliquée : Row=" + row + ", Col=" + col);
         } else {
-            System.out.println("PAS DEDANS!!!");
+            System.out.println("PAS DEDANS  !!!!!!!!!!!");
         }
     }
 }
