@@ -99,7 +99,8 @@ public class Case {
         else alive = getNeighbore(e);      
         if(life <= 0) return false;
         else {
-            return e.getRules().applyRule(state, alive, this);
+            if(e.getLifeMode())return e.getRules().applyRuleVanilla(state, alive);
+            else return e.getRules().applyRule(state, alive, this);
         }
     }
 

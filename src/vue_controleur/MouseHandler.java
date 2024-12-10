@@ -3,16 +3,14 @@ package vue_controleur;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import modele.Environnement;
-import modele.HexagonalGrid;
 
 public class MouseHandler implements MouseListener {
     
     public Environnement env;
-    private HexagonalGrid hexaGrid;
+    
 
-    public MouseHandler(Environnement env, HexagonalGrid hexaGrid) {
+    public MouseHandler(Environnement env) {
         this.env = env;
-        this.hexaGrid = hexaGrid;
     }
 
     @Override

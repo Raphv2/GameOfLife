@@ -89,6 +89,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JButton plus = createButton("+");
         JButton NUKE = createButton("NUKE");
         JButton reset = createButton("RESET");
+        JButton lifeMode = createButton("lifeMode");
 
         pan2.add(Box.createVerticalStrut(40));
         pan2.add(button);
@@ -100,7 +101,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
         pan2.add(Box.createVerticalStrut(5));
         pan2.add(reset);
         pan2.add(Box.createVerticalStrut(5));
-
+        pan2.add(lifeMode);
+        pan2.add(Box.createVerticalStrut(5));
 
         for (RuleType ruleType : RuleType.values()) {
             JButton ruleButton = createButton(ruleType.getRulesName());
@@ -132,8 +134,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
              env.rndState();
         });
 
-
-    
+        lifeMode.addActionListener(e -> {
+             env.setLifeMode();
+        });
 
         pan.add(pan1, BorderLayout.CENTER);
         pan.add(pan2, BorderLayout.EAST);
@@ -151,7 +154,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         if(env.getType()) pan.add(hexaGrid);
         
 
-        MouseHandler mouseHandler = new MouseHandler(env, hexaGrid);
+        MouseHandler mouseHandler = new MouseHandler(env);
         pan.addMouseListener(mouseHandler);
     }
 

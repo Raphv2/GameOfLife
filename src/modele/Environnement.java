@@ -9,8 +9,14 @@ public class Environnement extends Observable implements Runnable {
     private int speed;
     private boolean type;
     private Rules rules;
+    private boolean lifeMode;
 
     public Rules getRules(){return rules;}
+
+    public boolean getLifeMode(){return lifeMode;}
+
+    public void setLifeMode(){lifeMode = !lifeMode;}
+
 
     public void setRules(int numRules){
         switch (numRules) {
@@ -113,6 +119,7 @@ public class Environnement extends Observable implements Runnable {
         pause = false;
         speed = 1001;
         type = typeuh;
+        lifeMode = true;
     }
 
     public void rndState() {
