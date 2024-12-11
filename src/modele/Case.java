@@ -64,7 +64,7 @@ public class Case {
         state = rnd.nextBoolean();
     }
 
-    public int getNeighboreHexa(Environnement e){
+    public int getNeighboureHexa(Environnement e){
         int alive = 0;
 
         alive += e.getCase(this, Direction.gh).state ? 1 : 0;
@@ -77,7 +77,7 @@ public class Case {
         return alive;
     }
 
-    public int getNeighbore(Environnement e){
+    public int getNeighbour(Environnement e){
         int alive = 0;
 
         alive += e.getCase(this, Direction.gh).state ? 1 : 0;
