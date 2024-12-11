@@ -95,8 +95,8 @@ public class Case {
     public boolean nextState(Environnement e, boolean  type) {
         int alive = 0;
 
-        if(type) alive = getNeighboreHexa(e);
-        else alive = getNeighbore(e);      
+        if(type) alive = getNeighbourHexa(e);
+        else alive = getNeighbour(e);      
         if(life <= 0) return false;
         else {
             if(e.getLifeMode())return e.getRules().applyRuleVanilla(state, alive);
