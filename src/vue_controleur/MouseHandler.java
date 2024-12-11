@@ -35,8 +35,8 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX() + 30; 
-        int y = e.getY() + 50; 
+        int x = e.getX() - 10; 
+        int y = e.getY() ; 
         
         int cellSize = 20; 
 
