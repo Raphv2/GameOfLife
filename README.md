@@ -8,9 +8,6 @@ Bienvenue dans le projet **GameOfLife** ! Ce projet est une implémentation du c
 2. [Fonctionnalités](#fonctionnalités)
 3. [Technologies utilisées](#technologies-utilisées)
 4. [Installation](#installation)
-5. [Utilisation](#utilisation)
-6. [Contribuer](#contribuer)
-7. [Licence](#licence)
 
 ## Introduction
 
